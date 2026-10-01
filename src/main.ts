@@ -46,7 +46,6 @@ interface Heart {
           <button
             id="accept-date"
             class="btn yes dodge"
-            [style.transform]="'translate(' + offset().x + 'px, ' + offset().y + 'px)'"
             (click)="onYes($event)"
           >
             {{ yesLabel() }}
@@ -190,7 +189,9 @@ interface Heart {
   min-width: 220px;
   box-sizing: border-box;
   z-index: 5;
-  transition: transform 0.7s cubic-bezier(.34, 1.4, .64, 1);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  will-change: transform;
 }
 
 .ticket {
@@ -289,11 +290,6 @@ interface Heart {
   to { transform: none; opacity: 1; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .card, .heart { animation: none; }
-  .heart { display: none; }
-  .btn.yes.dodge { transition: none; }
-}
 `,
 })
 export class App {
@@ -359,6 +355,19 @@ export class App {
       if (Math.hypot(x - cur.x, y - cur.y) > 50) break;
     }
     this.offset.set({ x, y });
+
+    // أنيميشن بالـ Web Animations API عشان يشتغل على الآيفون (Safari)
+    const from = `translate3d(${cur.x}px, ${cur.y}px, 0)`;
+    const to = `translate3d(${x}px, ${y}px, 0)`;
+    btn.style.transform = to;
+    btn.animate(
+      [
+        { transform: from },
+        { transform: `translate3d(${cur.x + (x - cur.x) * 1.08}px, ${cur.y + (y - cur.y) * 1.08}px, 0)`, offset: 0.75 },
+        { transform: to },
+      ],
+      { duration: 700, easing: 'ease-out' }
+    );
   }
 
   private celebrate(): void {
