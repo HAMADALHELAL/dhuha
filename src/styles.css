@@ -1,0 +1,32 @@
+/* Single deliberate look: midnight navy, rose and soft gold */
+:root {
+  --bg: #0e1230;
+  --card: rgba(22, 27, 64, 0.82);
+  --fg: #f6eef2;
+  --muted: #b6b2cc;
+  --line: rgba(246, 238, 242, 0.14);
+  --rose: #e8668a;
+  --on-rose: #2a0b18;
+  --rose-soft: rgba(232, 102, 138, 0.18);
+  --gold: #e6c27a;
+  --gold-dim: rgba(230, 194, 122, 0.55);
+  --star: #fff7e0;
+  --glow: rgba(232, 102, 138, 0.22);
+  --font-display: 'Aref Ruqaa', 'Amiri', serif;
+  --font-body: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+  color-scheme: dark;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
