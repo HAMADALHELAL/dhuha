@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "projects": {
+    "dhuha": {
+      "projectType": "application",
+      "root": "",
+      "sourceRoot": "src",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.json",
+            "styles": ["src/styles.css"],
+            "outputPath": "dist"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all",
+              "optimization": { "scripts": true, "styles": { "minify": true, "inlineCritical": false }, "fonts": false }
+            },
+            "development": { "optimization": false, "sourceMap": true }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": { "development": { "buildTarget": "dhuha:build:development" } },
+          "defaultConfiguration": "development"
+        }
+      }
+    }
+  }
+}
